@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">UIbasic</string>
+    <string name="app_version">1.0.1</string>
+    <string name="userName">用户名</string>
+    <string name="button_login">登录</string>
+    <string name="useNameHint">用户名</string>
+    <string name="passwordHint">密码</string>
+    <string name="button_btn1">按钮1</string>
+    <string name="logo">登录Logo</string>
+</resources>

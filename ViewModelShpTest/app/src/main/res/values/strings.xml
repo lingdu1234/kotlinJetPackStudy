@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ViewModelShpTest</string>
+    <string name="button1">+1</string>
+    <string name="button2">-</string>
+    <string name="data_key">DATA_KEY</string>
+    <string name="shp_name">SHP_NAME</string>
+</resources>

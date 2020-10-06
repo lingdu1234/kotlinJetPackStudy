@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RecordScore</string>
+    <string name="addOne" translatable="false">+1</string>
+    <string name="addTwo" translatable="false">+2</string>
+    <string name="addThree" translatable="false">+3</string>
+    <string name="duiA">Team A</string>
+    <string name="duiB">Team B</string>
+</resources>

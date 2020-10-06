@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">UIbasic</string>
+    <string name="app_version">1.0.1</string>
+    <string name="userName">userName</string>
+    <string name="button_login">login</string>
+    <string name="useNameHint">userName</string>
+    <string name="button_btn1">button1</string>
+    <string name="logo">Login-logo</string>
+    <string name="passwordHint">password</string>
+</resources>

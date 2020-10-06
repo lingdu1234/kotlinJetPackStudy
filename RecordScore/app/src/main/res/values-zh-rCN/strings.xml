@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">计分器</string>
+    <string name="duiA">A队</string>
+    <string name="duiB">B队</string>
+</resources>

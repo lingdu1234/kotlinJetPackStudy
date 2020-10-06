@@ -13,20 +13,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.6" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="TextView" />
-    </ScrollView>
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
         android:id="@+id/buttonInsert"
@@ -56,16 +50,16 @@
         android:layout_height="wrap_content"
         android:text="delete"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSearch"
+        app:layout_constraintEnd_toStartOf="@+id/buttonSwitch"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonInsert" />
 
-    <Button
-        android:id="@+id/buttonSearch"
+    <Switch
+        android:id="@+id/buttonSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="search"
+        android:text="Switch"
         app:layout_constraintBottom_toBottomOf="@+id/buttonDelete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

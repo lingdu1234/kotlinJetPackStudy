@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 class Word(
-    @field:ColumnInfo(name = "english_word") var word: String,
+    @field:ColumnInfo(name = "english_word") var englishWord: String,
     @field:ColumnInfo(name = "chinese_meaning") var chineseMeaning: String
 ) {
     @PrimaryKey(autoGenerate = true)

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.fragment_gallery.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -54,7 +55,8 @@ class GalleryFragment : Fragment() {
         val galleyAdapter = GalleyAdapter()
         recyclerView.apply {
             adapter = galleyAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
+//            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         }
         galleryViewModel = ViewModelProvider(
             this,

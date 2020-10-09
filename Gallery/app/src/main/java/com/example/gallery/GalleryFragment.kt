@@ -3,6 +3,8 @@ package com.example.gallery
 //import android.content.pm.ActivityInfo
 //import android.os.Handler
 //import kotlinx.coroutines.GlobalScope
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -63,8 +65,13 @@ class GalleryFragment : Fragment() {
         recyclerView.apply {
             adapter = galleyAdapter
 //            layoutManager = GridLayoutManager(requireContext(), 2)
+//            ORIENTATION_LANDSCAPE
+// 根据屏幕方向设置界面
+            layoutManager =    when{
+                (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) -> StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                else -> StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            }
 
-            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         galleryViewModel.pagedListLiveData.observe(viewLifecycleOwner, Observer {
             galleyAdapter.submitList(it)

@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+//import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
@@ -16,7 +17,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import kotlinx.android.synthetic.main.gallery_cell.view.*
 
-class GalleyAdapter : ListAdapter<PhotoItem, MyViewHolder>(DIFFCALLBACK) {
+class GalleyAdapter : PagedListAdapter<PhotoItem, MyViewHolder>(DIFFCALLBACK) {
 
     object DIFFCALLBACK : DiffUtil.ItemCallback<PhotoItem>() {
         override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem): Boolean {
@@ -36,7 +37,7 @@ class GalleyAdapter : ListAdapter<PhotoItem, MyViewHolder>(DIFFCALLBACK) {
             Bundle().apply {
 //                putParcelable("PHOTO",getItem(holder.adapterPosition))
 ////                holder.itemView.findNavController().navigate(R.id.action_galleryFragment_to_photoFragment,this)
-                putParcelableArrayList("PHOTO_LIST", ArrayList(currentList))
+                putParcelableArrayList("PHOTO_LIST", ArrayList(currentList!!))
                 putInt("PHOTO_POSITION",holder.adapterPosition)
                 holder.itemView.findNavController().navigate(R.id.action_galleryFragment_to_pagerPtotoFragment,this)
 
@@ -47,13 +48,26 @@ class GalleyAdapter : ListAdapter<PhotoItem, MyViewHolder>(DIFFCALLBACK) {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.itemView.shimmerLayoutCell.apply {
+        val photoItem:PhotoItem = getItem(position)?:return
+        with(holder.itemView){
+            shimmerLayoutCell.apply {
+                setShimmerColor(0x55FFFFFF)
+                setShimmerAngle(0)
+                startShimmerAnimation()
+            }
+            textViewPhotoUser.text = photoItem.photoUser
+            textViewLikes.text = photoItem.photoLikes.toString()
+            textViewFavorites.text = photoItem.photoFavorites.toString()
+            imageView.layoutParams.height = photoItem.photoHeight
+
+        }
+/*        holder.itemView.shimmerLayoutCell.apply {
             setShimmerColor(0x55FFFFFF)
             setShimmerAngle(0)
             startShimmerAnimation()
-        }
+        }*/
         Glide.with(holder.itemView)
-            .load(getItem(position).previewUrl)
+            .load(getItem(position)?.previewUrl)
             .placeholder(R.drawable.ic_photo_grey_24)
             .listener(object :RequestListener<Drawable>{
                 override fun onLoadFailed(

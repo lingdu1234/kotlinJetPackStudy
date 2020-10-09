@@ -1,17 +1,26 @@
 package com.example.gallery
 
 import android.app.Application
-import android.util.Log
+import androidx.paging.toLiveData
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
-import com.google.gson.Gson
+//import android.util.Log
+//import androidx.lifecycle.LiveData
+//import androidx.lifecycle.MutableLiveData
+//import com.android.volley.Request
+//import com.android.volley.Response
+//import com.android.volley.toolbox.StringRequest
+//import com.google.gson.Gson
 
 class GalleryViewModel(application: Application) : AndroidViewModel(application) {
-    private val _photoListLive = MutableLiveData<List<PhotoItem>>()
+    val pagedListLiveData = PixabayDataFactory(application).toLiveData(1)
+    fun resetQuery(){
+        pagedListLiveData.value?.dataSource?.invalidate()
+    }
+
+
+
+
+/*    private val _photoListLive = MutableLiveData<List<PhotoItem>>()
     val photoListLive: LiveData<List<PhotoItem>> get() = _photoListLive
     fun fetchData() {
         val stringRequest = StringRequest(
@@ -36,5 +45,5 @@ class GalleryViewModel(application: Application) : AndroidViewModel(application)
     }
 
     private val keyWord =
-        arrayOf("cat", "dog", "car", "beauty", "phone", "flower", "sexy", "animal", "student")
+        arrayOf("cat", "dog", "car", "beauty", "phone", "flower", "sexy", "animal", "student")*/
 }

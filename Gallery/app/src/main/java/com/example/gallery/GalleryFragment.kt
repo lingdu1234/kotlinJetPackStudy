@@ -1,20 +1,22 @@
 package com.example.gallery
 
+//import android.content.pm.ActivityInfo
+//import android.os.Handler
+//import kotlinx.coroutines.GlobalScope
 import android.os.Bundle
-import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import kotlinx.android.synthetic.main.fragment_gallery.*
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class GalleryFragment : Fragment() {
-    private lateinit var galleryViewModel: GalleryViewModel
+    //    private lateinit var galleryViewModel: GalleryViewModel
+    private val galleryViewModel: GalleryViewModel by viewModels<GalleryViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +40,14 @@ class GalleryFragment : Fragment() {
         when (item.itemId) {
             R.id.swipeIndcator -> {
                 swipeLayoutGallery.isRefreshing = true
-                GlobalScope.launch {
+/*                GlobalScope.launch {
                     delay(1000)
-                    galleryViewModel.fetchData()
+                    galleryViewModel.resetQuery()
+                }*/
+//                Handler().postDelayed({ galleryViewModel.resetQuery() },1000)
+                viewLifecycleOwner.lifecycleScope.launch {
+                    delay(1000)
+                    galleryViewModel.resetQuery()
                 }
 
             }
@@ -56,19 +63,29 @@ class GalleryFragment : Fragment() {
         recyclerView.apply {
             adapter = galleyAdapter
 //            layoutManager = GridLayoutManager(requireContext(), 2)
-            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+
+            layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-        galleryViewModel = ViewModelProvider(
+        galleryViewModel.pagedListLiveData.observe(viewLifecycleOwner, Observer {
+            galleyAdapter.submitList(it)
+            swipeLayoutGallery.isRefreshing = false
+        })
+        swipeLayoutGallery.setOnRefreshListener {
+            galleryViewModel.resetQuery()
+        }
+/*        galleryViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
-        ).get(GalleryViewModel::class.java)
-        galleryViewModel.photoListLive.observe(this, Observer {
+        ).get(GalleryViewModel::class.java)*/
+
+
+/*        galleryViewModel.photoListLive.observe(this, Observer {
             galleyAdapter.submitList(it)
             swipeLayoutGallery.isRefreshing = false
         })
         galleryViewModel.photoListLive.value ?: galleryViewModel.fetchData()
         swipeLayoutGallery.setOnRefreshListener {
             galleryViewModel.fetchData()
-        }
+        }*/
     }
 }

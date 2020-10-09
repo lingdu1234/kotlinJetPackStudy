@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class Pixabay(
     val totalHit: Int,
     val hits: Array<PhotoItem>,
-    val total:Int
+    val total: Int
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -30,8 +30,26 @@ data class Pixabay(
     }
 }
 
-@Parcelize data class PhotoItem(
+@Parcelize
+data class PhotoItem(
     @SerializedName("webformatURL") val previewUrl: String,
-    @SerializedName("id")  val photoId: Int,
-    @SerializedName("largeImageURL")  val fullUrl: String,
-    ):Parcelable
+    @SerializedName("id") val photoId: Int,
+    @SerializedName("largeImageURL") val fullUrl: String,
+    @SerializedName("webformatWidth") val photoWidth: Int,
+    @SerializedName("webformatHeight") val photoHeight: Int,
+    @SerializedName("user") val photoUser: String,
+    @SerializedName("likes") val photoLikes: Int,
+    @SerializedName("favorites") val photoFavorites: Int,
+) : Parcelable
+/*
+            "webformatWidth":640,
+            "webformatHeight":426,
+            "favorites":1044,
+            "likes":1205,
+            "comments":273,
+            "user_id":1564471,
+            "user":"anncapictures",
+                        "imageWidth":6000,
+            "imageHeight":4000,
+
+ */

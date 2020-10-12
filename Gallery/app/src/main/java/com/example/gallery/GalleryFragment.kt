@@ -6,6 +6,7 @@ package com.example.gallery
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -53,6 +54,9 @@ class GalleryFragment : Fragment() {
                 }
 
             }
+            R.id.menuRetry -> {
+                galleryViewModel.retry()
+            }
         }
         return super.onOptionsItemSelected(item)
 
@@ -80,6 +84,9 @@ class GalleryFragment : Fragment() {
         swipeLayoutGallery.setOnRefreshListener {
             galleryViewModel.resetQuery()
         }
+        galleryViewModel.networkStatus.observe(viewLifecycleOwner, Observer {
+            Log.d("myTag","onActivityCreated-networkstutus===$it")
+        })
 /*        galleryViewModel = ViewModelProvider(
             this,
             ViewModelProvider.AndroidViewModelFactory(requireActivity().application)

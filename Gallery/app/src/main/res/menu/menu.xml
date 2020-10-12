@@ -4,4 +4,7 @@
     <item
         android:id="@+id/swipeIndcator"
         android:title="swipe to refresh" />
+    <item
+        android:id="@+id/menuRetry"
+        android:title="retry" />
 </menu>
